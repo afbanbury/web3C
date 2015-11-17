@@ -5,6 +5,23 @@ var gulp = require('gulp');
 var jshint = require('gulp-jshint');
 var nodemon = require('gulp-nodemon');
 
+gulp.task('copy-js', function(){
+	gulp.src([
+    'bower_components/bootstrap/dist/js/bootstrap.min.js',
+    'bower_components/angular/angular.min.js',
+    'bower_components/jquery/dist/jquery.min.js'
+])
+.pipe(gulp.dest('public/assets/js'));
+});
+
+gulp.task('copy-css', function(){
+	gulp.src([
+    'bower_components/bootstrap/dist/css/bootstrap.min.css',
+    'bower_components/bootstrap/dist/css/bootstrap-theme.min.css'
+])
+.pipe(gulp.dest('public/assets/css'));
+});
+
 // JS hint task
 gulp.task('jshint', function() {
   gulp.src('./src/scripts/*.js')
@@ -24,8 +41,8 @@ gulp.task('server', function (cb) {
 });
 
 //default
-gulp.task('default', ['jshint', 'server'], function() {
-
-
+gulp.task('default', ['copy-js', 'copy-css', 'jshint', 'server'], function() {
+  
 });
+
  
