@@ -3,6 +3,7 @@ var gulp = require('gulp');
 
 // include plug-ins
 var jshint = require('gulp-jshint');
+var jade = require('gulp-jade');
 var nodemon = require('gulp-nodemon');
 
 gulp.task('copy-js', function(){
@@ -11,7 +12,7 @@ gulp.task('copy-js', function(){
     'bower_components/angular/angular.min.js',
     'bower_components/jquery/dist/jquery.min.js'
 ])
-.pipe(gulp.dest('public/assets/js'));
+.pipe(gulp.dest('./public/assets/js'));
 });
 
 gulp.task('copy-css', function(){
@@ -19,14 +20,23 @@ gulp.task('copy-css', function(){
     'bower_components/bootstrap/dist/css/bootstrap.min.css',
     'bower_components/bootstrap/dist/css/bootstrap-theme.min.css'
 ])
-.pipe(gulp.dest('public/assets/css'));
+.pipe(gulp.dest('./public/assets/css'));
 });
 
 // JS hint task
 gulp.task('jshint', function() {
-  gulp.src('./src/scripts/*.js')
+  gulp.src([
+    '*.js',
+    './routes/*.js'])
     .pipe(jshint())
     .pipe(jshint.reporter('default'));
+});
+
+gulp.task('jade', function(){
+  gulp.src('./views/*.jade')
+  .pipe(jade())
+  .pipe(gulp.dest('./public/pages'));
+  
 });
 
 gulp.task('server', function (cb) {
