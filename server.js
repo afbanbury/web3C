@@ -4,6 +4,7 @@ var favicon = require('serve-favicon');
 var logger = require('morgan');
 var cookieParser = require('cookie-parser');
 var bodyParser = require('body-parser');
+var mongoose   = require('mongoose');
 
 var config = require('./config');
 
@@ -11,6 +12,9 @@ var api = require('./routes/api');
 var pages = require('./routes/pages');
 
 var app = express();
+
+// connect to our database (hosted on modulus.io)
+mongoose.connect('mongodb://localhost/web3Cdb');
 
 // view engine setup
 app.set('views', path.join(__dirname, 'views'));
